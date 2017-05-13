@@ -12,6 +12,7 @@ module.exports = function Messenger(telegramBot) {
 
 		bot.on('message', function(msg) {
 			storeChatId(msg.chat.id);
+			checkReplies(msg);
 		});
 	}
 
