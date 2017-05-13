@@ -45,8 +45,6 @@ module.exports = function Messenger(telegramBot) {
 		bot.onText(expression, function (msg) {
 			var messenger = sendMessage(responses[0].text, responses[0].delay, msg.chat.id);
 
-			reply_to_message_id
-
 			if (responses.length > 1) {
 				for (var j = 1; j < responses.length; j++) {
 					messenger.then(responses[j].text, responses[j].delay)
@@ -79,7 +77,7 @@ module.exports = function Messenger(telegramBot) {
 	}
 
 	function reply(text, chatId, messageId) {
-		sendMessage(text, null, chatId, message_id);
+		sendMessage(text, null, chatId, {reply_to_message_id: message_id});
 	}
 
 	function storeChatId(id) {
