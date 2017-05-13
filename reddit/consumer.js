@@ -16,7 +16,7 @@ module.exports = function SubredditConsumer(subreddit, messenger) {
 		r.getSubreddit(subreddit).getNew({limit: 1}).then(function(thead) {
 			if (!lastThread || thread.created_utc) {
 				lastThread = thread.created_utc;
-				sendMessage(thread.url):
+				sendMessage(thread.url);
 			}
 		});
 	}
