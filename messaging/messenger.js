@@ -77,7 +77,7 @@ module.exports = function Messenger(telegramBot) {
 	}
 
 	function reply(text, chatId, messageId) {
-		sendMessage(text, null, chatId, {reply_to_message_id: message_id});
+		sendMessage(text, null, chatId, {reply_to_message_id: messageId});
 	}
 
 	function storeChatId(id) {
