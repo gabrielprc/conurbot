@@ -23,7 +23,7 @@ module.exports = function SubredditConsumer(subreddit, messenger) {
 
 	function sendMessage(url) {
 		messenger
-			.sendMessage('Chicos, postearon algo en el sub ;)')
+			.send('Chicos, postearon algo en el sub ;)')
 			.then(url);
 	}
 }
