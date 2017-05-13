@@ -134,5 +134,29 @@ module.exports = [
 				text: 'Callejeros inocentes!!!'
 			}
 		]
+	},
+	{
+		expression: /werewolf/ig,
+		messages: [
+			{
+				text: 'Lucas es el lobo.'
+			}
+		]
+	},
+	{
+		expression: /aprende/ig,
+		messages: [
+			{
+				text: 'Aprender... a programar?'
+			}
+		]
+	},
+	{
+		expression: /(thotila|thotilla)/ig,
+		messages: [
+			{
+				text: 'No quiero decir que thotila sea un mentiroso, pero a veces le cuesta un poquito decir la verdad'
+			}
+		]
 	}
 ];
