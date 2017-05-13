@@ -2,6 +2,7 @@ var messages = require('./messages');
 
 module.exports = function Messenger(telegramBot) {
 	const bot = telegramBot;
+	var _self = this;
 	var chatIds = [];
 
 	function bind() {
@@ -23,8 +24,9 @@ module.exports = function Messenger(telegramBot) {
 
 		for (var i = 0; i < ids.length; i++) {
 			if (timeout) {
+				var id = ids[i];
 				setTimeout(function() {
-					bot.sendMessage(ids[i], message);
+					bot.sendMessage(id, message);
 				}, timeout);
 			} else {
 				bot.sendMessage(ids[i], message);
@@ -40,7 +42,7 @@ module.exports = function Messenger(telegramBot) {
 
 	function bindText(expression, responses) {
 		bot.onText(expression, function (msg) {
-			var messenger = sendMessage(msg.from.id, responses[0].text, responses[0].delay);
+			var messenger = sendMessage(responses[0].text, responses[0].delay, msg.from.id);
 
 			if (responses.length > 1) {
 				for (var j = 1; j < responses.length; j++) {

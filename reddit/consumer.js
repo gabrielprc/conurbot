@@ -13,8 +13,9 @@ module.exports = function SubredditConsumer(subreddit, messenger) {
 	var lastThread = null;
 
 	function get() {
-		r.getSubreddit(subreddit).getNew({limit: 1}).then(function(thread) {
-			if (!lastThread || thread.created_utc) {
+		r.getSubreddit(subreddit).getNew({limit: 1}).then(function(threads) {
+			var thread = threads[0];
+			if (!lastThread || lastThread != thread.created_utc) {
 				lastThread = thread.created_utc;
 				sendMessage(thread.url);
 			}
