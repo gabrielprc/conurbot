@@ -82,5 +82,57 @@ module.exports = [
 				delay: 7000
 			}
 		]
+	},
+	{
+		expression: /callejeros/ig,
+		messages: [
+			{
+				text: 'VOCES, SOLO VOCES COMO ECOS'
+			},
+			{
+				text: 'COMO ATROCES CHISTES SIN GRACIA',
+				delay: 1000
+			},
+			{
+				text: 'HACE MUCHO TIEMPO ESCUCHO VOCES',
+				delay: 2000
+			},
+			{
+				text: 'Y NI UNA PALABRA',
+				delay: 3000
+			}
+		]
+	},
+	{
+		expression: /callefuegos/ig,
+		messages: [
+			{
+				text: 'NO ESCUCHO Y SIGO'
+			},
+			{
+				text: 'PORQUE MUCHO DE LO QUE ESTA PROHIBIDO',
+				delay: 1000
+			},
+			{
+				text: 'ME HACE FELIIIIIZ',
+				delay: 2000
+			}
+		]
+	},
+	{
+		expression: /fuego/ig,
+		messages: [
+			{
+				text: 'Fuego? Callejeros no tiene nada que ver con esto!!!1!'
+			}
+		]
+	},
+	{
+		expression: /(inocente|musica|música)/ig,
+		messages: [
+			{
+				text: 'Callejeros inocentes!!!'
+			}
+		]
 	}
 ];
