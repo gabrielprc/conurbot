@@ -42,7 +42,7 @@ module.exports = function Messenger(telegramBot) {
 
 	function bindText(expression, responses) {
 		bot.onText(expression, function (msg) {
-			var messenger = sendMessage(responses[0].text, responses[0].delay, msg.from.id);
+			var messenger = sendMessage(responses[0].text, responses[0].delay, msg.chat.id);
 
 			if (responses.length > 1) {
 				for (var j = 1; j < responses.length; j++) {
