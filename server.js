@@ -8,4 +8,5 @@ var messenger = new Messenger(bot);
 messenger.bind();
 
 var consumer = new SubredditConsumer('conurban', messenger);
+setInterval(consumer.get, 10000);
 

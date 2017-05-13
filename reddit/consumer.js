@@ -12,7 +12,7 @@ module.exports = function SubredditConsumer(subreddit, messenger) {
 
 	var lastThread = null;
 
-	this.get = function() {
+	function get() {
 		r.getSubreddit(subreddit).getNew({limit: 1}).then(function(thead) {
 			if (!lastThread || thread.created_utc) {
 				lastThread = thread.created_utc;
@@ -25,5 +25,9 @@ module.exports = function SubredditConsumer(subreddit, messenger) {
 		messenger
 			.send('Chicos, postearon algo en el sub ;)')
 			.then(url);
+	}
+
+	return {
+		get: get
 	}
 }
