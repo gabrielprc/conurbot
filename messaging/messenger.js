@@ -16,7 +16,7 @@ module.exports = function Messenger(telegramBot) {
 		// });
 	}
 
-	this.sendMessage(fromId, message, timeout) {
+	this.sendMessage = function(fromId, message, timeout) {
 		if (timeout) {
 			setTimeout(function() {
 				bot.sendMessage(fromId, message);
