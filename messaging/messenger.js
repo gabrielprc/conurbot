@@ -16,19 +16,7 @@ module.exports = function Messenger(telegramBot) {
 		// });
 	}
 
-	function bindText(expression, responses) {
-		bot.onText(expression, function (msg) {
-			var messenger = sendMessage(msg.from.id, responses[0].text, responses[0].delay);
-
-			if (responses.length > 1) {
-				for (var j = 1; j < responses.length; j++) {
-					messenger.then(responses[j].text, responses[j].delay)
-				}
-			}
-		});	
-	}
-
-	function sendMessage(fromId, message, timeout) {
+	this.sendMessage(fromId, message, timeout) {
 		if (timeout) {
 			setTimeout(function() {
 				bot.sendMessage(fromId, message);
@@ -42,5 +30,17 @@ module.exports = function Messenger(telegramBot) {
 				return sendMessage(fromId, m, t);
 			}
 		}
+	}
+
+	function bindText(expression, responses) {
+		bot.onText(expression, function (msg) {
+			var messenger = sendMessage(msg.from.id, responses[0].text, responses[0].delay);
+
+			if (responses.length > 1) {
+				for (var j = 1; j < responses.length; j++) {
+					messenger.then(responses[j].text, responses[j].delay)
+				}
+			}
+		});	
 	}
 }
