@@ -1,4 +1,4 @@
-var token = process.env.TELEGRAM_TOKEN || 'el token loco';
+var token = process.env.TELEGRAM_TOKEN;
 var TelegramBot = require('node-telegram-bot-api');
 var bot = new TelegramBot(token, {polling: true});
 var Messenger = require('./messaging/messenger');

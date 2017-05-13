@@ -2,32 +2,38 @@ var messages = require('./messages');
 
 module.exports = function Messenger(telegramBot) {
 	const bot = telegramBot;
+	var chatIds = [];
 
 	function bind() {
 		for (var i = 0; i < messages.length; i++) {
 			bindText(messages[i].expression, messages[i].messages);
 		}
 
-		// bot.on('message', function (msg) {
-		// 	var chatId = msg.chat.id;
-		// 	// photo can be: a file path, a stream or a Telegram file_id
-		// 	var photo = 'cats.png';
-		// 	bot.sendPhoto(chatId, photo, {caption: 'Lovely kittens'});
-		// });
+		bot.on('message', function(msg) {
+			storeChatId(msg.chat.id);
+		});
 	}
 
-	function sendMessage(fromId, message, timeout) {
-		if (timeout) {
-			setTimeout(function() {
-				bot.sendMessage(fromId, message);
-			}, timeout);
+	function sendMessage(message, timeout, fromId) {
+		if (!fromId) {
+			var ids = chatIds;
 		} else {
-			bot.sendMessage(fromId, message);
+			var ids = [fromId];
+		}
+
+		for (var i = 0; i < ids.length; i++) {
+			if (timeout) {
+				setTimeout(function() {
+					bot.sendMessage(ids[i], message);
+				}, timeout);
+			} else {
+				bot.sendMessage(ids[i], message);
+			}
 		}
 
 		return {
 			then: function(m, t) {
-				return sendMessage(fromId, m, t);
+				return sendMessage(m, t, fromId);
 			}
 		}
 	}
@@ -42,6 +48,21 @@ module.exports = function Messenger(telegramBot) {
 				}
 			}
 		});	
+	}
+
+	function storeChatId(id) {
+		var exists = false;
+
+		for (var i = 0; i < chatIds.length; i++) {
+			if (chatIds[i] == id) {
+				exists = true;
+				break;
+			}
+		}
+
+		if (!exists) {
+			chatIds.push(id);
+		}
 	}
 
 	return {
