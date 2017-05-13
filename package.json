@@ -1,0 +1,22 @@
+{
+  "name": "conurbot",
+  "version": "0.0.1",
+  "description": "Telegram bot",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielprc/conurbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielprc/conurbot/issues"
+  },
+  "homepage": "https://github.com/gabrielprc/conurbot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.27.1"
+  }
+}
