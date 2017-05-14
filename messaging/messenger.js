@@ -5,6 +5,7 @@ module.exports = function Messenger(telegramBot) {
 	const bot = telegramBot;
 	var _self = this;
 	var chatIds = [];
+	var lastReply = null;
 
 	function bind() {
 		for (var i = 0; i < messages.length; i++) {
@@ -90,7 +91,9 @@ module.exports = function Messenger(telegramBot) {
 
 	function doSometimes(callback) {
 		var chance = Math.random();
-		if (chance <= 0.05) {
+		var now = new Date().getTime();
+		if (chance <= 0.05 && (!lastReply || (now - lastReply) >= 60000)) {
+			lastReply = now;
 			callback();
 		}
 	}
