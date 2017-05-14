@@ -16,6 +16,8 @@ module.exports = function Messenger(telegramBot) {
 			bindCommand(commands[i]);
 		}
 
+		bindAdminTools();
+
 		bot.on('message', function(msg) {
 			storeChatId(msg.chat.id);
 			checkReplies(msg);
@@ -67,7 +69,7 @@ module.exports = function Messenger(telegramBot) {
 		});
 	}
 
-	function bindAdminTools(command) {
+	function bindAdminTools() {
 		bot.onText(/\/echo (.+)/, (msg, match) => {
 			if (msg.from.username === 'conurban') {
 				sendMessage(match[1]);
