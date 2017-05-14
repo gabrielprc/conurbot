@@ -67,6 +67,14 @@ module.exports = function Messenger(telegramBot) {
 		});
 	}
 
+	function bindAdminTools(command) {
+		bot.onText(/\/echo (.+)/, (msg, match) => {
+			if (msg.from.username === 'conurban') {
+				sendMessage(match[1], null, msg.chat.id);
+			}
+		});
+	}
+
 	function checkReplies(msg) {
 		doSometimes(function() {
 			switch(msg.from.username) {
