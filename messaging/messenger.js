@@ -1,4 +1,5 @@
 var messages = require('./messages');
+var commands = require('./commands');
 
 module.exports = function Messenger(telegramBot) {
 	const bot = telegramBot;
@@ -8,6 +9,10 @@ module.exports = function Messenger(telegramBot) {
 	function bind() {
 		for (var i = 0; i < messages.length; i++) {
 			bindText(messages[i].expression, messages[i].messages);
+		}
+
+		for (var i = 0; i < commands.length; i++) {
+			bindCommand(commands[i]);
 		}
 
 		bot.on('message', function(msg) {
@@ -43,19 +48,26 @@ module.exports = function Messenger(telegramBot) {
 
 	function bindText(expression, responses) {
 		bot.onText(expression, function (msg) {
-			var messenger = sendMessage(responses[0].text, responses[0].delay, msg.chat.id);
+			doSometimes(function() {
+				var messenger = sendMessage(responses[0].text, responses[0].delay, msg.chat.id);
 
-			if (responses.length > 1) {
-				for (var j = 1; j < responses.length; j++) {
-					messenger.then(responses[j].text, responses[j].delay)
+				if (responses.length > 1) {
+					for (var j = 1; j < responses.length; j++) {
+						messenger.then(responses[j].text, responses[j].delay)
+					}
 				}
-			}
-		});	
+			});
+		});
+	}
+
+	function bindCommand(command) {
+		bot.onText(new RegExp('\/' + command.command, 'ig'), function (msg) {
+			sendMessage(command.getMessage(), null, msg.chat.id);
+		});
 	}
 
 	function checkReplies(msg) {
-		var chance = Math.random();
-		if (chance <= 0.1) {
+		doSometimes(function() {
 			switch(msg.from.username) {
 				case 'lukeovalle':
 					reply('Aprendé a programar.', msg.chat.id, msg.message_id)
@@ -73,6 +85,13 @@ module.exports = function Messenger(telegramBot) {
 					reply('Hola, rekkardo', msg.chat.id, msg.message_id)
 					break;
 			}
+		});
+	}
+
+	function doSometimes(callback) {
+		var chance = Math.random();
+		if (chance <= 0.05) {
+			callback();
 		}
 	}
 
