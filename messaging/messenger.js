@@ -90,7 +90,7 @@ module.exports = function Messenger(telegramBot) {
 
 	function bindCommand(command) {
 		bot.onText(command.regex, function (msg, match) {
-			sendMessage(command.getMessage(match), null, msg.chat.id);
+			sendMessage(command.getMessage(match[1]), null, msg.chat.id);
 		});
 	}
 
