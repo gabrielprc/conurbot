@@ -31,6 +31,12 @@ module.exports = function Messenger(telegramBot) {
 			var ids = [fromId];
 		}
 
+		if (!options) {
+			options = {
+				parse_mode: 'markdown'
+			}
+		}
+
 		for (var i = 0; i < ids.length; i++) {
 			if (timeout) {
 				var id = ids[i];
