@@ -1,6 +1,7 @@
 var commands = [
 	{
 		command: 'help',
+		regex: /help/ig,
 		description: 'Te tiro la lista de cosas que puedo hacer.'
 			+ ' Soy medio pedorro todavía, pero más pedorro sos vos que interactuás con un bot sin utilidad.'
 			+ '\nPara cosas útiles, hablá con el lukebot, la dankie o el spippatore.',
@@ -17,6 +18,7 @@ var commands = [
 	},
 	{
 		command: 'callejeros',
+		regex: /callejeros/ig,
 		description: 'Te tiro un verso de Callejeros (inocentes, la música no mata)',
 		getMessage: function() {
 			return verses[Math.floor(Math.random() * verses.length)];
@@ -24,13 +26,15 @@ var commands = [
 	},
 	{
 		command: 'fact',
+		regex: /fact/ig,
 		description: 'Te tiro una posta pedorrísima que copié de una página del orto (y encima la mayoría están escritas para el ojete)',
 		getMessage: function() {
 			return facts[Math.floor(Math.random() * facts.length)];
 		}
 	},
 	{
-		command: 'vaporize (.+)',
+		command: 'vaporize <caca>',
+		regex: /vaporize +(.+)/ig,
 		description: 'sadboy2001-ize your message',
 		getMessage: function(string) {
 			var finalString = '';
