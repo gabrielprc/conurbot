@@ -41,12 +41,12 @@ var commands = [
 			var chars = string.split('');
 			for (var i = 0; i < chars.length; i++) {
 				if (i > 0) {
-					finalString += ' ';	
+					finalString += '  ';	
 				}
 				finalString += chars[i];
 			}
 
-			finalString = '*_' + finalString + '_*';
+			finalString = '`' + finalString + '`';
 
 			return finalString;
 		}
