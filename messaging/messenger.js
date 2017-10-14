@@ -49,6 +49,31 @@ module.exports = function Messenger(telegramBot) {
 		}
 	}
 
+	function sendPicture(path, timeout, fromId, options) {
+		if (!fromId) {
+			var ids = chatIds;
+		} else {
+			var ids = [fromId];
+		}
+
+		for (var i = 0; i < ids.length; i++) {
+			if (timeout) {
+				var id = ids[i];
+				setTimeout(function() {
+					bot.sendPhoto(id, path, options);
+				}, timeout);
+			} else {
+				bot.sendPhoto(id, path, options);
+			}
+		}
+
+		return {
+			then: function(p, t, o) {
+				return sendPicture(p, t, fromId, o);
+			}
+		}
+	}
+
 	function bindText(expression, responses) {
 		bot.onText(expression, function (msg) {
 			doSometimes(function() {
@@ -64,8 +89,8 @@ module.exports = function Messenger(telegramBot) {
 	}
 
 	function bindCommand(command) {
-		bot.onText(new RegExp('\/' + command.command, 'ig'), function (msg) {
-			sendMessage(command.getMessage(), null, msg.chat.id);
+		bot.onText(new RegExp('\/' + command.command + ' (.+)', 'ig'), function (msg, match) {
+			sendMessage(command.getMessage(match), null, msg.chat.id);
 		});
 	}
 
@@ -79,23 +104,7 @@ module.exports = function Messenger(telegramBot) {
 
 	function checkReplies(msg) {
 		doSometimes(function() {
-			switch(msg.from.username) {
-				case 'lukeovalle':
-					reply('Aprendé a programar.', msg.chat.id, msg.message_id)
-					break;
-				case 'ElMenduko':
-					reply('Andá a pisar uvas.', msg.chat.id, msg.message_id)
-					break;
-				case 'Lucas_93':
-					reply('Ehhhh.......... dame una birra.', msg.chat.id, msg.message_id)
-					break;
-				case 'conurban':
-					reply('Me caés bien', msg.chat.id, msg.message_id)
-					break;
-				case 'patyconprovoleta':
-					reply('Hola, rekkardo', msg.chat.id, msg.message_id)
-					break;
-			}
+			replyPicture('../resources/images/pepe.png', msg.chat.id, msg.message_id);
 		});
 	}
 
@@ -110,6 +119,10 @@ module.exports = function Messenger(telegramBot) {
 
 	function reply(text, chatId, messageId) {
 		sendMessage(text, null, chatId, {reply_to_message_id: messageId});
+	}
+
+	function replyPicture(path, chatId, messageId) {
+		sendPicture(path, null, chatId, {reply_to_message_id: messageId});
 	}
 
 	function storeChatId(id) {

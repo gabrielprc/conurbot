@@ -28,6 +28,24 @@ var commands = [
 		getMessage: function() {
 			return facts[Math.floor(Math.random() * facts.length)];
 		}
+	},
+	{
+		command: 'vaporize',
+		description: 'sadboy2001-ize your message',
+		getMessage: function(string) {
+			var finalString = '';
+			var chars = string.split('');
+			for (var i = 0; i < chars.length; i++) {
+				if (i > 0) {
+					finalString += ' ';	
+				}
+				finalString += chars[i];
+			}
+
+			finalString = '__' + finalString + '__';
+
+			return finalString;
+		}
 	}
 ];
 

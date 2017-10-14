@@ -1,5 +1,13 @@
 module.exports = [
 	{
+		expression: /hola/ig,
+		messages: [
+			{
+				text: 'hola soy rekka'
+			}
+		]
+	},
+	{
 		expression: /ping/ig,
 		messages: [
 			{

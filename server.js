@@ -22,9 +22,20 @@ server.listen(port, function(err){
 });
 
 function start() {
+	var messenger = startMessenger();
+
+	startConsumer('conurban', messenger);
+	startConsumer('dankgentina', messenger);
+	startConsumer('dankgentinacirclejerk', messenger);
+}
+
+function startMessenger() {
 	var messenger = new Messenger(bot);
 	messenger.bind();
+	return messenger;
+}
 
-	var consumer = new SubredditConsumer('conurban', messenger);
-	setInterval(consumer.get, 10000);
+function startConsumer(subreddit, messenger) {
+	var consumer = new SubredditConsumer(subreddit, messenger);
+	setInterval(consumer.get, 10000);	
 }
