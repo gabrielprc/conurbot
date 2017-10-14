@@ -30,7 +30,7 @@ var commands = [
 		}
 	},
 	{
-		command: 'vaporize',
+		command: 'vaporize (.+)',
 		description: 'sadboy2001-ize your message',
 		getMessage: function(string) {
 			var finalString = '';
