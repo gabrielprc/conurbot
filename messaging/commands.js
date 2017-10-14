@@ -46,7 +46,7 @@ var commands = [
 				finalString += chars[i];
 			}
 
-			finalString = '__' + finalString + '__';
+			finalString = '*_' + finalString + '_*';
 
 			return finalString;
 		}
