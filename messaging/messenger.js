@@ -38,13 +38,13 @@ module.exports = function Messenger(telegramBot) {
 		}
 
 		for (var i = 0; i < ids.length; i++) {
+			var id = ids[i];
 			if (timeout) {
-				var id = ids[i];
 				setTimeout(function() {
 					bot.sendMessage(id, message, options);
 				}, timeout);
 			} else {
-				bot.sendMessage(ids[i], message, options);
+				bot.sendMessage(id, message, options);
 			}
 		}
 
@@ -63,8 +63,8 @@ module.exports = function Messenger(telegramBot) {
 		}
 
 		for (var i = 0; i < ids.length; i++) {
+			var id = ids[i];
 			if (timeout) {
-				var id = ids[i];
 				setTimeout(function() {
 					bot.sendPhoto(id, path, options);
 				}, timeout);
